@@ -7,7 +7,8 @@
             [taoensso.timbre :as timbre]
             [taoensso.timbre.appenders.rotor :as rotor]
             [selmer.parser :as parser]
-            [environ.core :refer [env]]))
+            [environ.core :refer [env]]
+            [fun-test.models.schema :as schema]))
 
 (defroutes app-routes
   (route/resources "/")
@@ -32,6 +33,10 @@
     {:path "fun_test.log" :max-size (* 512 1024) :backlog 10})
 
   (if (env :dev) (parser/cache-off!))
+
+  ;; Initialize db
+  (if-not (schema/initialized?) (schema/create-tables))
+
   (timbre/info "fun-test started successfully"))
 
 (defn destroy

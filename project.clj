@@ -39,5 +39,5 @@
   :plugins
   [[lein-ring "0.8.10"] [lein-environ "0.4.0"]]
   :description
-  "FIXME: write description"
+  "Messing around with Clojure and Luminus"
   :min-lein-version "2.0.0")
